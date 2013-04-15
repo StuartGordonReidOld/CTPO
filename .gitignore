@@ -5,3 +5,4 @@
 *.war
 *.ear
 /CTPO_Implementation/nbproject/private/
+/CTPO_Implementation/build/
