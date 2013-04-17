@@ -13,12 +13,25 @@ import java.util.logging.Logger;
  * @author stuart
  */
 public class FileIO {
-    
+
     public FileIO() {
-        
     }
-    
-    public BufferedReader getBufferedReader(String fileName) {
+
+    public static FileWriter getFileWriter(String fileN) {
+        FileWriter fileWriter;
+        File outputFile;
+        try {
+            String fileName = currentDirectory() + fileN;
+            outputFile = new File(fileName);
+            fileWriter = new FileWriter(outputFile);
+            return fileWriter;
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    public static BufferedReader getBufferedReader(String fileName) {
         FileReader fileReader;
         try {
             fileReader = new FileReader(fileName);
@@ -29,11 +42,23 @@ public class FileIO {
         }
         return null;
     }
-    
-    public String currentDirectory() {
+
+    public static String currentDirectory() {
         File tempFile = new File("###");
         String workingDirectory = tempFile.getAbsolutePath();
-        workingDirectory = workingDirectory.replaceAll("###","");
+        workingDirectory = workingDirectory.replaceAll("###", "");
         return workingDirectory;
+    }
+
+    public String promptName() {
+        String portfolioName;
+        try {
+            BufferedReader keyBoardReader = new BufferedReader(new InputStreamReader(System.in));
+            
+            keyBoardReader.close();
+            return "";
+        } catch(Exception ex) {
+            return "";
+        }
     }
 }
