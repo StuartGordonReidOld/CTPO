@@ -2,12 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package securities;
+package tradeable;
 
 /**
  *
  * @author stuart
  */
-public class Currency {
-    
+public class Currency extends Security {
+
+    Currency() {
+    }
 }
