@@ -2,23 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package portfolio;
+package C1_portfolio;
 
 import java.util.ArrayList;
-import tradeable.Currency;
-import tradeable.Security;
+import C2_portfolio.instruments.Currency;
+import C2_portfolio.instruments.Security;
 
 /**
  *
  * @author stuart
  */
-public class CTPortfolio extends Portfolio {
+public class CarryTradePortfolio extends Portfolio {
 
     Currency fundingCurrency;
     ArrayList<Currency> investmentCurrencies;
 
-    CTPortfolio(String name) {
+    public CarryTradePortfolio(String name) {
         super(name);
+        
     }
     
     @Override

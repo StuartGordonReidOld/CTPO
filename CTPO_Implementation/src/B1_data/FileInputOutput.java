@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package data;
+package B1_data;
 
 import java.io.*;
 import java.util.logging.Level;
@@ -12,9 +12,9 @@ import java.util.logging.Logger;
  *
  * @author stuart
  */
-public class FileIO {
+public class FileInputOutput {
 
-    public FileIO() {
+    public FileInputOutput() {
     }
 
     public static FileWriter getFileWriter(String fileN) {

@@ -2,14 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tradeable;
+package D1_portfolio.selection;
 
 /**
  *
  * @author stuart
  */
-public class Currency extends Security {
-
-    Currency() {
-    }
+public class PortfolioSelection {
+    
 }

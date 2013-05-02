@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package portfolio;
+package C1_portfolio;
 
 import java.util.ArrayList;
-import tradeable.Investment;
-import tradeable.Security;
+import C2_portfolio.instruments.Trade;
+import C2_portfolio.instruments.Security;
 
 /**
  *
@@ -14,16 +14,18 @@ import tradeable.Security;
  */
 public abstract class Portfolio {
 
-    private ArrayList<Investment> investments;
+    private ArrayList<Trade> investments;
     private String name;
     private double risk, roi;
     private double cashBalance;
     private double profit;
 
     //Constructers
-    public Portfolio(String name) {
+    Portfolio(String n) {
         risk = Double.MAX_VALUE;
         roi = Double.MIN_VALUE;
+        investments = new ArrayList();
+        name = n;
     }
 
     public Portfolio(String name, String fileName) {
@@ -38,9 +40,15 @@ public abstract class Portfolio {
 
     //Portfolio import and export
     public void printPortfolio() {
-        System.out.println("Investments: ");
+        System.out.println("PRINTING " + name.toUpperCase() + ":");
+        System.out.print("Investments: {");
         for (int i = 0; i < investments.size(); i++) {
+            investments.get(i).print();
+            if (i != investments.size() - 1) {
+                System.out.print(", ");
+            }
         }
+        System.out.print("}, Cash Balance: " + this.cashBalance + "\n");
     }
 
     public void exportPortfolio() {
@@ -50,10 +58,23 @@ public abstract class Portfolio {
     }
 
     //Portfolio operations
-    public void add(Security security) {
+    public void buy(Trade investment) {
+        try {
+            if (investment.getPrice() >= 0) {
+                if (investment.getQuantity() >= 0) {
+                    investments.add(investment);
+                    cashBalance = cashBalance - (investment.getPrice() * investment.getQuantity());
+                } else {
+                    System.out.println("You can't make an investment with a negative quantity");
+                }
+            } else {
+                System.out.println("You can't make an investment with a negative price");
+            }
+        } catch (Exception exception) {
+        }
     }
 
-    public void sell(Investment investment, double qty) {
+    public void sell(Trade investment, double sellQuantity) {
         try {
             for (int i = 0; i < investments.size(); i++) {
                 //Loop through portfolio find and 'sell' security
@@ -62,9 +83,13 @@ public abstract class Portfolio {
                     //Get the details of the investment being sold off
                     double buyPrice = investments.get(i).getPrice();
                     double sellPrice = investment.getPrice();
-                    double quantity = investment.getQuantity();
+                    double holdingQuantity = investment.getQuantity();
 
-                    if (quantity >= qty) {
+                    if (holdingQuantity >= sellQuantity) {
+                        double profitLoss = (sellPrice - buyPrice) * sellQuantity;
+                        cashBalance += sellPrice * sellQuantity;
+                        profit += profitLoss;
+                        investments.get(i).setQuantity(holdingQuantity - sellQuantity);
                     } else {
                         System.out.println("You can't sell more of " + investment.getName() + " than you have");
                     }
@@ -75,7 +100,7 @@ public abstract class Portfolio {
         }
     }
 
-    public void sellOff(Investment investment) {
+    public void sellOff(Trade investment) {
         try {
             for (int i = 0; i < investments.size(); i++) {
                 //Loop through portfolio find and 'sell' security
@@ -131,16 +156,32 @@ public abstract class Portfolio {
         }
     }
 
-    public ArrayList<Investment> getInvestments() {
+    public ArrayList<Trade> getInvestments() {
         return investments;
     }
 
-    public void setInvestments(ArrayList<Investment> investments) {
+    public void setInvestments(ArrayList<Trade> investments) {
         this.investments = investments;
     }
 
     public double getCashBalance() {
         return cashBalance;
+    }
+
+    public void creditCashBalance(double credit) {
+        if (credit >= 0) {
+            this.cashBalance += credit;
+        } else {
+            System.out.println("You can't credit a negative cash amount");
+        }
+    }
+
+    public void debitCashBalance(double debit) {
+        if (debit >= 0) {
+            this.cashBalance -= debit;
+        } else {
+            System.out.println("You can't debit a negative cash amount");
+        }
     }
 
     public void setCashBalance(double cashBalance) {

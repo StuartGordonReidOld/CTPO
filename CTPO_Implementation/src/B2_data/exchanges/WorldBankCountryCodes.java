@@ -2,43 +2,44 @@
  * for which countries the argument applies. This class aims to define a way to
  * get valid country codes and names for the World Bank
  */
-package data.exchanges.WorldBank;
+package B2_data.exchanges;
 
-import data.FileIO;
+import B1_data.FileInputOutput;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  *
  * @author stuart
  */
-public class CountryCodes {
+public class WorldBankCountryCodes {
 
     private ArrayList<CountryCode> countryCodes;
-    FileIO sharedFileIO;
+    FileInputOutput sharedFileIO;
 
     public static void main(String args[]) {
         try {
-            CountryCodes countryCode = new CountryCodes();
+            WorldBankCountryCodes countryCode = new WorldBankCountryCodes();
             countryCode.initializeCountryCodeList();
             System.out.println(countryCode.getCountry("AFG"));
         } catch (IOException ex) {
-            Logger.getLogger(CountryCodes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WorldBankCountryCodes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /* This is the constructor for the class. It created a shared FilIO object
      * for manipulating files and it initializes the country code list.
      */
-    CountryCodes() {
+    WorldBankCountryCodes() {
         try {
-            sharedFileIO = new FileIO();
+            sharedFileIO = new FileInputOutput();
             countryCodes = new ArrayList();
             initializeCountryCodeList();
         } catch (IOException ex) {
-            Logger.getLogger(CountryCodes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WorldBankCountryCodes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -46,7 +47,7 @@ public class CountryCodes {
      * based on the ISO 31661 standard. 
      */
     private void initializeCountryCodeList() throws IOException {
-        String fullFileName = sharedFileIO.currentDirectory() + "src/data/exchanges/WorldBank/ISO31661.txt";
+        String fullFileName = sharedFileIO.currentDirectory() + "src/data/exchanges/#ISO31661.txt";
         BufferedReader bufferedFileReader = sharedFileIO.getBufferedReader(fullFileName);
         String str = bufferedFileReader.readLine();
 
@@ -117,7 +118,6 @@ public class CountryCodes {
         return codes;
     }
 }
-
 /* This class is just a struct with some getters and settes for Country Codes
  */
 class CountryCode {

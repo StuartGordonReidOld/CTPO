@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package data.exchanges;
+package B2_data.exchanges;
 
-import data.FileIO;
+import B1_data.FileInputOutput;
 import java.io.*;
 
-public class Exchange {
+public class DataExchange {
 
     String exchangeName;
     FileWriter outputFileWriter;
 
-    public Exchange(String name) {
+    public DataExchange(String name) {
         exchangeName = name;
-        outputFileWriter = FileIO.getFileWriter(name);
+        outputFileWriter = FileInputOutput.getFileWriter(name);
     }
 
     public String getExchangeName() {

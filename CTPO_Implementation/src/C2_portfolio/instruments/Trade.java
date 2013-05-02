@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tradeable;
+package C2_portfolio.instruments;
 
 import java.util.Objects;
 
@@ -10,17 +10,17 @@ import java.util.Objects;
  *
  * @author stuart
  */
-public class Investment {
+public class Trade {
 
     final Security security;
-    final double quantity;
     final double price;
     final String name;
+    double quantity;
 
-    Investment(Security s, double qty, double p, String n) {
+    public Trade(Security s, double qty, String n) {
         security = s;
         quantity = qty;
-        price = p;
+        price = s.getPrice();
         name = n;
     }
 
@@ -36,12 +36,21 @@ public class Investment {
         return quantity;
     }
 
+    public void setQuantity(double qty) {
+        quantity = qty;
+    }
+
     public double getPrice() {
         return price;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void print() {
+        System.out.print(name + "| " + security.getName() + " at "
+                + price + " for " + quantity);
     }
 
     //Comparitive functions
@@ -53,7 +62,7 @@ public class Investment {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Investment other = (Investment) obj;
+        final Trade other = (Trade) obj;
         if (!Objects.equals(this.security, other.security)) {
             return false;
         }

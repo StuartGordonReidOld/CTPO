@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tradeable;
+package C2_portfolio.instruments;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +11,7 @@ import java.util.Collection;
  *
  * @author stuart
  */
-public class Security {
+public abstract class Security {
 
     //Historical data
     private ArrayList<Double> priceHistory;
@@ -21,8 +21,14 @@ public class Security {
     private double risk;
     private double roi;
     private double alpha;
+    private String name;
 
-    Security() {
+    Security(String n) {
+        name = n;
+    }
+
+    public String getName() {
+        return name;
     }
 
     //Getters and setters

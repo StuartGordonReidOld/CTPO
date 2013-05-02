@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package A_main;
 
 /**
  *
  * @author stuart
  */
-public class CTPO_Implementation {
+public class Implementation {
 
     /**
      * @param args the command line arguments
